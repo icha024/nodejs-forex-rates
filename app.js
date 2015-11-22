@@ -96,7 +96,9 @@ app.get('/convert', function(req, res) {
 
     var convertedRates = {};
     for (idx in toCurList) {
-        convertedRates[toCurList[idx]] = currencyMap[baseCur] / currencyMap[toCurList[idx]];
+	console.log("to cur list is: ");
+	console.dir(toCurList[idx]);
+        convertedRates[toCurList[idx]] = currencyMap[toCurList[idx]] / currencyMap[baseCur];
         if (isNaN(convertedRates[toCurList[idx]])) {
             promptInvalidCurrency(res);
             return;
@@ -107,7 +109,7 @@ app.get('/convert', function(req, res) {
     data['base'] = baseCur
     data['rates'] = {}
     for (eachCur in convertedRates) {
-        data['rates'][eachCur] = convertedRates[toCurList[idx]]
+        data['rates'][eachCur] = convertedRates[eachCur]
     }
     res.write(JSON.stringify(data));
     res.end();
