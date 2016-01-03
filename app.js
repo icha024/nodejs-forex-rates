@@ -110,7 +110,8 @@ app.get('/convert', function(req, res) {
     data['rates'] = {}
     for (eachCur in convertedRates) {
         data['rates'][eachCur] = convertedRates[eachCur]
-    }
+    } 
+    res.setHeader('Content-Type', 'application/json');
     res.write(JSON.stringify(data));
     res.end();
 });
